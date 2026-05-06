@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Novo Perfil",
+    "Projects": [
+      {
+        "Path": "Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Envio_de_Emails_Com_Fila_Worker\\Envio_de_Emails_Com_Fila_Worker.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
