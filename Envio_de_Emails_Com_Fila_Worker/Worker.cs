@@ -4,6 +4,8 @@ using System.Text;
 using System.Text.Json;
 using Envio_de_Emails_Com_Fila.Shared.Models;
 using Envio_de_Emails_Com_Fila_Worker.Services;
+using Polly.Retry;
+using Polly;
 
 namespace Envio_de_Emails_Com_Fila_Worker
 {
@@ -50,7 +52,15 @@ namespace Envio_de_Emails_Com_Fila_Worker
 
                 try
                 {
-                    await ProcessWithRetry(msg, stoppingToken);
+                    var policy = CreateRetryPolicy();
+
+                    await policy.ExecuteAsync(async () =>
+                    {
+                        if (msg.To.Contains("fail"))
+                            throw new Exception("Erro forçado");
+
+                        await _emailService.SendEmail(msg);
+                    });
 
                     await _channel.BasicAckAsync(ea.DeliveryTag, false);
                 }
@@ -69,32 +79,21 @@ namespace Envio_de_Emails_Com_Fila_Worker
             );
         }
 
-        private async Task ProcessWithRetry(EmailMessage msg, CancellationToken ct)
+        private AsyncRetryPolicy CreateRetryPolicy()
         {
-            int[] delays = { 1000, 3000, 9000 };
+            int[] delays = { 1, 3, 9 };
 
-            for (int i = 0; i < delays.Length; i++)
-            {
-                try
-                {
-                    if (msg.To.Contains("fail"))
+            return Policy
+                .Handle<Exception>()
+                .WaitAndRetryAsync(
+                    delays.Length,
+                    retryAttempt => TimeSpan.FromSeconds(delays[retryAttempt - 1]),
+                    (exception, timeSpan, retryCount, context) =>
                     {
-                        throw new Exception("Erro");
-                    }
-
-                    await _emailService.SendEmail(msg);
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning($"Tentativa {i + 1} falhou: {ex.Message}");
-
-                    if (i == delays.Length - 1)
-                        throw;
-
-                    await Task.Delay(delays[i], ct);
-                }
-            }
+                        _logger.LogWarning(
+                            $"Tentativa {retryCount} falhou. Próxima em {timeSpan.TotalSeconds}s"
+                        );
+                    });
         }
     }
 }
