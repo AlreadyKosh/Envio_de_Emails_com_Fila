@@ -10,15 +10,12 @@
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.16.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
+    <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Envio_de_Emails_Com_Fila.Shared\Envio_de_Emails_Com_Fila.Shared.csproj" />
     <ProjectReference Include="..\Envio_de_Emails_Com_Fila_API\Envio_de_Emails_Com_Fila_API.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

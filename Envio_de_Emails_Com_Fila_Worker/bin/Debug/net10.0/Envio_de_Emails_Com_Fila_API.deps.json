@@ -10,7 +10,8 @@
         "dependencies": {
           "Envio_de_Emails_Com_Fila.Shared": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "10.0.7",
-          "RabbitMQ.Client": "7.2.1"
+          "RabbitMQ.Client": "7.2.1",
+          "Scalar.AspNetCore": "2.14.11"
         },
         "runtime": {
           "Envio_de_Emails_Com_Fila_API.dll": {}
@@ -40,6 +41,14 @@
           "lib/net8.0/RabbitMQ.Client.dll": {
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.2.1.0"
+          }
+        }
+      },
+      "Scalar.AspNetCore/2.14.11": {
+        "runtime": {
+          "lib/net10.0/Scalar.AspNetCore.dll": {
+            "assemblyVersion": "2.14.11.0",
+            "fileVersion": "2.14.11.0"
           }
         }
       },
@@ -79,6 +88,13 @@
       "sha512": "sha512-YKXEfg9fVQiTKgZlvIhAfPSFaamEgi8DsQmisCH0IAsU4FYLrtoguDrDj6JtJVGUt40QPnBLRH6fTQcAC4qsOg==",
       "path": "rabbitmq.client/7.2.1",
       "hashPath": "rabbitmq.client.7.2.1.nupkg.sha512"
+    },
+    "Scalar.AspNetCore/2.14.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EthfC0++GjWX5JB84OUTsNlzRMr8v6zGinx8i2msKWitAkvGbvjBz7ET9XoUis4Z3M+iH6jIJ66uUGzZqmrSGg==",
+      "path": "scalar.aspnetcore/2.14.11",
+      "hashPath": "scalar.aspnetcore.2.14.11.nupkg.sha512"
     },
     "Envio_de_Emails_Com_Fila.Shared/1.0.0": {
       "type": "project",

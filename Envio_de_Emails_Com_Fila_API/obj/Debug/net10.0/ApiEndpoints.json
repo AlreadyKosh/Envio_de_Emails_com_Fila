@@ -2,7 +2,7 @@
   {
     "ContainingType": "Envio_de_Emails_Com_Fila_API.Controllers.MessagesController",
     "Method": "Send",
-    "RelativePath": "messages",
+    "RelativePath": "Messages",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -13,6 +13,28 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "Tags": [
+      "Rabbit"
+    ]
   }
 ]

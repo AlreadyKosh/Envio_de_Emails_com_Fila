@@ -660,6 +660,35 @@
           }
         }
       },
+      "Polly/7.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Polly.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Polly.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Polly.Extensions.Http/3.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Polly": "7.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Polly.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Polly.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "RabbitMQ.Client/7.2.1": {
         "type": "package",
         "dependencies": {
@@ -675,6 +704,22 @@
             "related": ".xml"
           }
         }
+      },
+      "Scalar.AspNetCore/2.14.11": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "System.Diagnostics.EventLog/10.0.7": {
         "type": "package",
@@ -755,7 +800,8 @@
         "dependencies": {
           "Envio_de_Emails_Com_Fila.Shared": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "10.0.7",
-          "RabbitMQ.Client": "7.2.1"
+          "RabbitMQ.Client": "7.2.1",
+          "Scalar.AspNetCore": "2.14.11"
         },
         "compile": {
           "bin/placeholder/Envio_de_Emails_Com_Fila_API.dll": {}
@@ -1774,6 +1820,36 @@
         "mimekit.nuspec"
       ]
     },
+    "Polly/7.1.0": {
+      "sha512": "mpQsvlEn4ipgICh5CGyVLPV93RFVzOrBG7wPZfzY8gExh7XgWQn0GCDY9nudbUEJ12UiGPP9i4+CohghBvzhmg==",
+      "type": "package",
+      "path": "polly/7.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.1/Polly.dll",
+        "lib/netstandard1.1/Polly.xml",
+        "lib/netstandard2.0/Polly.dll",
+        "lib/netstandard2.0/Polly.xml",
+        "polly.7.1.0.nupkg.sha512",
+        "polly.nuspec"
+      ]
+    },
+    "Polly.Extensions.Http/3.0.0": {
+      "sha512": "drrG+hB3pYFY7w1c3BD+lSGYvH2oIclH8GRSehgfyP5kjnFnHKQuuBhuHLv+PWyFuaTDyk/vfRpnxOzd11+J8g==",
+      "type": "package",
+      "path": "polly.extensions.http/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.1/Polly.Extensions.Http.dll",
+        "lib/netstandard1.1/Polly.Extensions.Http.xml",
+        "lib/netstandard2.0/Polly.Extensions.Http.dll",
+        "lib/netstandard2.0/Polly.Extensions.Http.xml",
+        "polly.extensions.http.3.0.0.nupkg.sha512",
+        "polly.extensions.http.nuspec"
+      ]
+    },
     "RabbitMQ.Client/7.2.1": {
       "sha512": "YKXEfg9fVQiTKgZlvIhAfPSFaamEgi8DsQmisCH0IAsU4FYLrtoguDrDj6JtJVGUt40QPnBLRH6fTQcAC4qsOg==",
       "type": "package",
@@ -1789,6 +1865,25 @@
         "lib/netstandard2.0/RabbitMQ.Client.xml",
         "rabbitmq.client.7.2.1.nupkg.sha512",
         "rabbitmq.client.nuspec"
+      ]
+    },
+    "Scalar.AspNetCore/2.14.11": {
+      "sha512": "EthfC0++GjWX5JB84OUTsNlzRMr8v6zGinx8i2msKWitAkvGbvjBz7ET9XoUis4Z3M+iH6jIJ66uUGzZqmrSGg==",
+      "type": "package",
+      "path": "scalar.aspnetcore/2.14.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net10.0/Scalar.AspNetCore.dll",
+        "lib/net10.0/Scalar.AspNetCore.xml",
+        "lib/net8.0/Scalar.AspNetCore.dll",
+        "lib/net8.0/Scalar.AspNetCore.xml",
+        "lib/net9.0/Scalar.AspNetCore.dll",
+        "lib/net9.0/Scalar.AspNetCore.xml",
+        "scalar.aspnetcore.2.14.11.nupkg.sha512",
+        "scalar.aspnetcore.nuspec"
       ]
     },
     "System.Diagnostics.EventLog/10.0.7": {
@@ -1911,27 +2006,28 @@
       "Envio_de_Emails_Com_Fila_API >= 1.0.0",
       "MailKit >= 4.16.0",
       "Microsoft.Extensions.Hosting >= 10.0.7",
+      "Polly.Extensions.Http >= 3.0.0",
       "RabbitMQ.Client >= 7.2.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\": {},
+    "C:\\Users\\alrea\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_Worker\\Envio_de_Emails_Com_Fila_Worker.csproj",
+      "projectUniqueName": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_Worker\\Envio_de_Emails_Com_Fila_Worker.csproj",
       "projectName": "Envio_de_Emails_Com_Fila_Worker",
-      "projectPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_Worker\\Envio_de_Emails_Com_Fila_Worker.csproj",
-      "packagesPath": "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_Worker\\obj\\",
+      "projectPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_Worker\\Envio_de_Emails_Com_Fila_Worker.csproj",
+      "packagesPath": "C:\\Users\\alrea\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_Worker\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\t2s-douglas_carreira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1940,6 +2036,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1947,11 +2044,11 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila.Shared\\Envio_de_Emails_Com_Fila.Shared.csproj": {
-              "projectPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila.Shared\\Envio_de_Emails_Com_Fila.Shared.csproj"
+            "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila.Shared\\Envio_de_Emails_Com_Fila.Shared.csproj": {
+              "projectPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila.Shared\\Envio_de_Emails_Com_Fila.Shared.csproj"
             },
-            "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj": {
-              "projectPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj"
+            "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj": {
+              "projectPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj"
             }
           }
         }
@@ -1980,6 +2077,10 @@
           "Microsoft.Extensions.Hosting": {
             "target": "Package",
             "version": "[10.0.7, )"
+          },
+          "Polly.Extensions.Http": {
+            "target": "Package",
+            "version": "[3.0.0, )"
           },
           "RabbitMQ.Client": {
             "target": "Package",
