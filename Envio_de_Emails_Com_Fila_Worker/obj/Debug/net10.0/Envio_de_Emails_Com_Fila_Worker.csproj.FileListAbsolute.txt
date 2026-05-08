@@ -30,3 +30,7 @@ C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_De_Emails
 C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_De_Emails_Com_Fila_Worker\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_Worker.pdb
 C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_De_Emails_Com_Fila_Worker\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_Worker.genruntimeconfig.cache
 C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_De_Emails_Com_Fila_Worker\obj\Debug\net10.0\ref\Envio_de_Emails_Com_Fila_Worker.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_Worker.sourcelink.json
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.Core.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.Extensions.dll

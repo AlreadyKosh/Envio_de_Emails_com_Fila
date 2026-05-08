@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "0Vbs4b/eFP8=",
+  "dgSpecHash": "x8J5C428ZZ0=",
   "success": true,
   "projectFilePath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.7\\microsoft.aspnetcore.openapi.10.0.7.nupkg.sha512",
     "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\polly\\8.6.6\\polly.8.6.6.nupkg.sha512",
+    "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\polly.core\\8.6.6\\polly.core.8.6.6.nupkg.sha512",
+    "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\polly.extensions\\8.6.6\\polly.extensions.8.6.6.nupkg.sha512",
     "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\rabbitmq.client\\7.2.1\\rabbitmq.client.7.2.1.nupkg.sha512"
   ],
   "logs": []
