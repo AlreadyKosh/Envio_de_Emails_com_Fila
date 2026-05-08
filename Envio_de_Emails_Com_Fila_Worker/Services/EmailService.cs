@@ -25,15 +25,34 @@ namespace Envio_de_Emails_Com_Fila_Worker.Services
         {
             var content = msg.Content;
 
-            var cep = CepHelper.ExtrairCep(content);
+            var zipCodes = CepHelper.ExtractZipCode(content)
+                                .Distinct()
+                                .ToList();
 
-            if (!string.IsNullOrEmpty(cep))
+            if (zipCodes.Any())
             {
-                var endereco = await _cepService.ObterEndereco(cep);
-
-                if (!string.IsNullOrEmpty(endereco))
+                var tasks = zipCodes.Select(async zipCode =>
                 {
-                    content += $"\n\nEndereço encontrado:\n{endereco}";
+                    var address = await _cepService.GetAdress(zipCode);
+                    return new { ZipCode = zipCode, Adress = address };
+                });
+
+                var results = await Task.WhenAll(tasks);
+
+                var validAddresses = results
+                    .Where(x => !string.IsNullOrEmpty(x.Adress))
+                    .ToList();
+
+                if (validAddresses.Any())
+                {
+                    content += "\n\nEndereços encontrados:\n";
+
+                    int i = 1;
+                    foreach (var item in validAddresses)
+                    {
+                        content += $"\nEndereço {i} (CEP: {item.ZipCode}):\n{item.Adress}\n";
+                        i++;
+                    }
                 }
             }
 

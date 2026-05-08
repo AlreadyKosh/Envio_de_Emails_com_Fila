@@ -66,3 +66,7 @@ C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_Worker\obj\Debug\net10.0\ref\Envio_de_Emails_Com_Fila_Worker.dll
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.dll
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.Extensions.Http.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Polly.Extensions.Http.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\bin\Debug\net10.0\Scalar.AspNetCore.dll
+C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_Worker\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_Worker.sourcelink.json

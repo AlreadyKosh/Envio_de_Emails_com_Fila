@@ -16,9 +16,9 @@ namespace Envio_de_Emails_Com_Fila_Worker.Services
             _http = http;
         }
 
-        public async Task<string?> ObterEndereco(string cep)
+        public async Task<string?> GetAdress(string zipCode)
         {
-            var response = await _http.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
+            var response = await _http.GetAsync($"https://viacep.com.br/ws/{zipCode}/json/");
 
             if (!response.IsSuccessStatusCode)
                 return null;
