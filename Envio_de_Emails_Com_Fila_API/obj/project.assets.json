@@ -66,13 +66,14 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Envio_de_Emails_Com_Fila.Shared/1.0.0": {
+      "Envio_de_Emails_Com_Fila_Shared/1.0.0": {
         "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
         "compile": {
-          "bin/placeholder/Envio_de_Emails_Com_Fila.Shared.dll": {}
+          "bin/placeholder/Envio_de_Emails_Com_Fila_Shared.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Envio_de_Emails_Com_Fila.Shared.dll": {}
+          "bin/placeholder/Envio_de_Emails_Com_Fila_Shared.dll": {}
         }
       }
     }
@@ -150,38 +151,38 @@
         "scalar.aspnetcore.nuspec"
       ]
     },
-    "Envio_de_Emails_Com_Fila.Shared/1.0.0": {
+    "Envio_de_Emails_Com_Fila_Shared/1.0.0": {
       "type": "project",
-      "path": "../Envio_de_Emails_Com_Fila.Shared/Envio_de_Emails_Com_Fila.Shared.csproj",
-      "msbuildProject": "../Envio_de_Emails_Com_Fila.Shared/Envio_de_Emails_Com_Fila.Shared.csproj"
+      "path": "../Envio_de_Emails_Com_Fila_Shared/Envio_de_Emails_Com_Fila_Shared.csproj",
+      "msbuildProject": "../Envio_de_Emails_Com_Fila_Shared/Envio_de_Emails_Com_Fila_Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "Envio_de_Emails_Com_Fila.Shared >= 1.0.0",
+      "Envio_de_Emails_Com_Fila_Shared >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.7",
       "RabbitMQ.Client >= 7.2.1",
       "Scalar.AspNetCore >= 2.14.11"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\": {},
+    "C:\\Users\\alrea\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj",
+      "projectUniqueName": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj",
       "projectName": "Envio_de_Emails_Com_Fila_API",
-      "projectPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj",
-      "packagesPath": "C:\\Users\\t2s-douglas_carreira\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila_API\\obj\\",
+      "projectPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_API\\Envio_de_Emails_Com_Fila_API.csproj",
+      "packagesPath": "C:\\Users\\alrea\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\t2s-douglas_carreira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -190,6 +191,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -197,8 +199,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila.Shared\\Envio_de_Emails_Com_Fila.Shared.csproj": {
-              "projectPath": "C:\\Users\\t2s-douglas_carreira\\Workspace\\Envio_de_Emails_Com_Fila\\Envio_de_Emails_Com_Fila.Shared\\Envio_de_Emails_Com_Fila.Shared.csproj"
+            "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_Shared\\Envio_de_Emails_Com_Fila_Shared.csproj": {
+              "projectPath": "C:\\Users\\alrea\\Workspace\\Projetos_Vini\\Envio_de_Emails_com_Fila\\Envio_de_Emails_Com_Fila_Shared\\Envio_de_Emails_Com_Fila_Shared.csproj"
             }
           }
         }

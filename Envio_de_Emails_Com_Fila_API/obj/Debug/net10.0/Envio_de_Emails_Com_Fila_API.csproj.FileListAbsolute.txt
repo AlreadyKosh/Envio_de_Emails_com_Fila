@@ -47,8 +47,6 @@ C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\RabbitMQ.Client.dll
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Scalar.AspNetCore.dll
-C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Envio_de_Emails_Com_Fila.Shared.dll
-C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Envio_de_Emails_Com_Fila.Shared.pdb
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_API.csproj.AssemblyReference.cache
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\rpswa.dswa.cache.json
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_API.GeneratedMSBuildEditorConfig.editorconfig
@@ -67,7 +65,6 @@ C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\Envio_de.3C7077AD.Up2Date
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_API.dll
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\refint\Envio_de_Emails_Com_Fila_API.dll
@@ -76,3 +73,5 @@ C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_
 C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\ref\Envio_de_Emails_Com_Fila_API.dll
 C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Scalar.AspNetCore.dll
 C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila_API\obj\Debug\net10.0\Envio_de_Emails_Com_Fila_API.sourcelink.json
+C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Envio_De_Emails_com_Fila_Shared.dll
+C:\Users\alrea\Workspace\Projetos_Vini\Envio_de_Emails_com_Fila\Envio_de_Emails_Com_Fila_API\bin\Debug\net10.0\Envio_De_Emails_com_Fila_Shared.pdb

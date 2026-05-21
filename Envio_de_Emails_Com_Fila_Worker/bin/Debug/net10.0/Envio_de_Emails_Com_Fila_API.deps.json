@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v10.0": {
       "Envio_de_Emails_Com_Fila_API/1.0.0": {
         "dependencies": {
-          "Envio_de_Emails_Com_Fila.Shared": "1.0.0",
+          "Envio_De_Emails_com_Fila_Shared": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "10.0.7",
           "RabbitMQ.Client": "7.2.1",
           "Scalar.AspNetCore": "2.14.11"
@@ -52,9 +52,9 @@
           }
         }
       },
-      "Envio_de_Emails_Com_Fila.Shared/1.0.0": {
+      "Envio_De_Emails_com_Fila_Shared/1.0.0": {
         "runtime": {
-          "Envio_de_Emails_Com_Fila.Shared.dll": {
+          "Envio_De_Emails_com_Fila_Shared.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -96,7 +96,7 @@
       "path": "scalar.aspnetcore/2.14.11",
       "hashPath": "scalar.aspnetcore.2.14.11.nupkg.sha512"
     },
-    "Envio_de_Emails_Com_Fila.Shared/1.0.0": {
+    "Envio_De_Emails_com_Fila_Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

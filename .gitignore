@@ -1,1 +1,109 @@
+# =========================
+# Build / Output
+# =========================
+bin/
+obj/
+out/
+publish/
+
+# =========================
+# User-specific files
+# =========================
+*.user
+*.userosscache
+*.suo
+*.rsuser
+
+# =========================
+# Visual Studio
+# =========================
 .vs/
+.vscode/
+*.code-workspace
+
+# =========================
+# Rider / JetBrains
+# =========================
+.idea/
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Environment files
+# =========================
+.env
+.env.*
+appsettings.Development.json
+appsettings.Local.json
+
+# =========================
+# Secrets / Sensitive
+# =========================
+secrets.json
+*.pfx
+*.key
+*.pem
+
+# =========================
+# NuGet
+# =========================
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# =========================
+# Node (caso tenha frontend junto)
+# =========================
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Coverage / Test
+# =========================
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# =========================
+# Database
+# =========================
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# =========================
+# Generated files
+# =========================
+Generated/

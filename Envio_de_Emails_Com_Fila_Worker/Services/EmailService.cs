@@ -1,4 +1,4 @@
-﻿using Envio_de_Emails_Com_Fila.Shared.Models;
+﻿using Envio_de_Emails_Com_Fila_Shared.Models;
 using Envio_de_Emails_Com_Fila_Worker.Helper;
 using Envio_de_Emails_Com_Fila_Worker.Models.Email;
 using Envio_de_Emails_Com_Fila_Worker.Services.Interfaces;

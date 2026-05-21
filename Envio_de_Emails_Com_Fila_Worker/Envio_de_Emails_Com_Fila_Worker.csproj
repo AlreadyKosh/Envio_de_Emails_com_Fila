@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -10,12 +10,15 @@
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.16.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.8" />
+    <PackageReference Include="Polly" Version="8.6.6" />
+    <PackageReference Include="Polly.Extensions" Version="8.6.6" />
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Envio_de_Emails_Com_Fila.Shared\Envio_de_Emails_Com_Fila.Shared.csproj" />
     <ProjectReference Include="..\Envio_de_Emails_Com_Fila_API\Envio_de_Emails_Com_Fila_API.csproj" />
+    <ProjectReference Include="..\Envio_de_Emails_Com_Fila_Shared\Envio_de_Emails_Com_Fila_Shared.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿using Envio_de_Emails_Com_Fila.Shared.Models;
+﻿using Envio_de_Emails_Com_Fila_Shared.Models;
 using Envio_de_Emails_Com_Fila_API.Services;
 using Microsoft.AspNetCore.Mvc;
 

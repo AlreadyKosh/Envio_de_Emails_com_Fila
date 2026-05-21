@@ -1,9 +1,12 @@
+using Envio_de_Emails_Com_Fila_Shared.Models;
+using Envio_de_Emails_Com_Fila_Worker.Services;
+using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
-using Envio_de_Emails_Com_Fila.Shared.Models;
-using Envio_de_Emails_Com_Fila_Worker.Services;
 
 namespace Envio_de_Emails_Com_Fila_Worker
 {
@@ -27,11 +30,12 @@ namespace Envio_de_Emails_Com_Fila_Worker
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost"
+                HostName = Environment.GetEnvironmentVariable("RabbitMQ__HostName") ?? "localhost",
+                UserName = Environment.GetEnvironmentVariable("RabbitMQ__UserName") ?? "guest",
+                Password = Environment.GetEnvironmentVariable("RabbitMQ__Password") ?? "guest"
             };
 
-            _connection = await factory.CreateConnectionAsync();
-            _channel = await _connection.CreateChannelAsync();
+            await ConnectRabbitAsync(factory, stoppingToken);
 
             await _channel.QueueDeclareAsync(
                 queue: QueueName,
@@ -67,6 +71,41 @@ namespace Envio_de_Emails_Com_Fila_Worker
                 autoAck: false,
                 consumer: consumer
             );
+        }
+
+        private async Task ConnectRabbitAsync(ConnectionFactory factory, CancellationToken ct)
+        {
+            var retryConnection = Policy
+                .Handle<BrokerUnreachableException>()
+                .Or<SocketException>()
+                .Or<IOException>()
+                .WaitAndRetryAsync(
+                    retryCount: 10,
+                    sleepDurationProvider: attempt =>
+                    {
+                        var baseDelay = TimeSpan.FromSeconds(Math.Pow(2, attempt));
+                        var jitter = TimeSpan.FromMilliseconds(Random.Shared.Next(0, 300));
+                        return baseDelay + jitter;
+                    },
+                    onRetry: (ex, delay, retry, ctx) =>
+                    {
+                        _logger.LogWarning(ex,
+                            "Tentativa {Retry} de conexão com RabbitMQ falhou. Aguardando {Delay}s. Erro: {Message}",
+                            retry,
+                            delay.TotalSeconds,
+                            ex.Message
+                        );
+                    });
+
+            await retryConnection.ExecuteAsync(async () =>
+            {
+                _logger.LogInformation("Tentando conectar no RabbitMQ...");
+
+                _connection = await factory.CreateConnectionAsync();
+                _channel = await _connection.CreateChannelAsync();
+
+                _logger.LogInformation("Conectado no RabbitMQ!");
+            });
         }
 
         private async Task ProcessWithRetry(EmailMessage msg, CancellationToken ct)

@@ -1,4 +1,4 @@
-﻿using Envio_de_Emails_Com_Fila.Shared.Models;
+﻿using Envio_de_Emails_Com_Fila_Shared.Models;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
@@ -15,7 +15,9 @@ namespace Envio_de_Emails_Com_Fila_API.Services
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost"
+                HostName = Environment.GetEnvironmentVariable("RabbitMQ__HostName") ?? "localhost",
+                UserName = Environment.GetEnvironmentVariable("RabbitMQ__UserName") ?? "guest",
+                Password = Environment.GetEnvironmentVariable("RabbitMQ__Password") ?? "guest"
             };
 
             _connection = factory.CreateConnectionAsync().GetAwaiter().GetResult();

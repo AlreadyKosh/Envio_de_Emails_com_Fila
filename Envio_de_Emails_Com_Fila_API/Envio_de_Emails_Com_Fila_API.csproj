@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Envio_de_Emails_Com_Fila.Shared\Envio_de_Emails_Com_Fila.Shared.csproj" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\Envio_de_Emails_Com_Fila_Shared\Envio_de_Emails_Com_Fila_Shared.csproj" />
   </ItemGroup>
 
 </Project>
