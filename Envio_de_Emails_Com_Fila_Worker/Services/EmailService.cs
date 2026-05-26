@@ -1,66 +1,36 @@
-﻿using Envio_de_Emails_Com_Fila_Shared.Models;
-using Envio_de_Emails_Com_Fila_Worker.Helper;
+using Envio_de_Emails_Com_Fila_Shared.Models;
 using Envio_de_Emails_Com_Fila_Worker.Models.Email;
 using Envio_de_Emails_Com_Fila_Worker.Services.Interfaces;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System.Runtime;
+using MimeKit.Utils;
 
 namespace Envio_de_Emails_Com_Fila_Worker.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly CepService _cepService;
+        private readonly IEmailContentEnricher _emailContentEnricher;
         private readonly EmailSettings _settings;
 
-        public EmailService(CepService cepService, IOptions<EmailSettings> settings)
+        public EmailService(IEmailContentEnricher emailContentEnricher, IOptions<EmailSettings> settings)
         {
-            _cepService = cepService;
+            _emailContentEnricher = emailContentEnricher;
             _settings = settings.Value;
-
         }
 
         public async Task SendEmail(EmailMessage msg)
         {
-            var content = msg.Content;
-
-            var zipCodes = CepHelper.ExtractZipCode(content)
-                                .Distinct()
-                                .ToList();
-
-            if (zipCodes.Any())
-            {
-                var tasks = zipCodes.Select(async zipCode =>
-                {
-                    var address = await _cepService.GetAdress(zipCode);
-                    return new { ZipCode = zipCode, Adress = address };
-                });
-
-                var results = await Task.WhenAll(tasks);
-
-                var validAddresses = results
-                    .Where(x => !string.IsNullOrEmpty(x.Adress))
-                    .ToList();
-
-                if (validAddresses.Any())
-                {
-                    content += "\n\nEndereços encontrados:\n";
-
-                    int i = 1;
-                    foreach (var item in validAddresses)
-                    {
-                        content += $"\nEndereço {i} (CEP: {item.ZipCode}):\n{item.Adress}\n";
-                        i++;
-                    }
-                }
-            }
+            var content = await _emailContentEnricher.EnrichAsync(msg.Content);
 
             var email = new MimeMessage();
 
             email.From.Add(MailboxAddress.Parse("test@mailtrap.io"));
             email.To.Add(MailboxAddress.Parse(msg.To));
             email.Subject = "Email Teste";
+            email.MessageId = string.IsNullOrWhiteSpace(msg.MessageId)
+                ? MimeUtils.GenerateMessageId()
+                : $"{msg.MessageId}@envio-emails.local";
 
             email.Body = new TextPart("plain")
             {

@@ -1,6 +1,6 @@
+using Envio_de_Emails_Com_Fila_PersistenceWorker.Services;
 using Envio_de_Emails_Com_Fila_Shared.Messaging;
 using Envio_de_Emails_Com_Fila_Shared.Models;
-using Envio_de_Emails_Com_Fila_Worker.Services;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -9,19 +9,19 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 
-namespace Envio_de_Emails_Com_Fila_Worker
+namespace Envio_de_Emails_Com_Fila_PersistenceWorker
 {
     public class Worker : BackgroundService
     {
-        private readonly EmailService _emailService;
+        private readonly EmailPersistenceService _emailPersistenceService;
         private readonly ILogger<Worker> _logger;
 
         private IConnection _connection = null!;
         private IChannel _channel = null!;
 
-        public Worker(EmailService emailService, ILogger<Worker> logger)
+        public Worker(EmailPersistenceService emailPersistenceService, ILogger<Worker> logger)
         {
-            _emailService = emailService;
+            _emailPersistenceService = emailPersistenceService;
             _logger = logger;
         }
 
@@ -34,7 +34,7 @@ namespace Envio_de_Emails_Com_Fila_Worker
                 Password = Environment.GetEnvironmentVariable("RabbitMQ__Password") ?? "guest"
             };
 
-            await ConnectRabbitAsync(factory, stoppingToken);
+            await ConnectRabbitAsync(factory);
 
             await _channel.ExchangeDeclareAsync(
                 exchange: RabbitMqTopology.EmailExchangeName,
@@ -44,14 +44,14 @@ namespace Envio_de_Emails_Com_Fila_Worker
             );
 
             await _channel.QueueDeclareAsync(
-                queue: RabbitMqTopology.EmailQueueName,
+                queue: RabbitMqTopology.EmailPersistenceQueueName,
                 durable: true,
                 exclusive: false,
                 autoDelete: false
             );
 
             await _channel.QueueBindAsync(
-                queue: RabbitMqTopology.EmailQueueName,
+                queue: RabbitMqTopology.EmailPersistenceQueueName,
                 exchange: RabbitMqTopology.EmailExchangeName,
                 routingKey: RabbitMqTopology.EmailReceivedRoutingKey
             );
@@ -71,26 +71,24 @@ namespace Envio_de_Emails_Com_Fila_Worker
                         throw new JsonException("Mensagem de email invalida.");
                     }
 
-                    await ProcessWithRetry(msg, stoppingToken);
-
+                    await _emailPersistenceService.SaveAsync(msg, stoppingToken);
                     await _channel.BasicAckAsync(ea.DeliveryTag, false);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Erro ao processar mensagem");
-
+                    _logger.LogError(ex, "Erro ao persistir mensagem de email");
                     await _channel.BasicNackAsync(ea.DeliveryTag, false, false);
                 }
             };
 
             await _channel.BasicConsumeAsync(
-                queue: RabbitMqTopology.EmailQueueName,
+                queue: RabbitMqTopology.EmailPersistenceQueueName,
                 autoAck: false,
                 consumer: consumer
             );
         }
 
-        private async Task ConnectRabbitAsync(ConnectionFactory factory, CancellationToken ct)
+        private async Task ConnectRabbitAsync(ConnectionFactory factory)
         {
             var retryConnection = Policy
                 .Handle<BrokerUnreachableException>()
@@ -107,7 +105,7 @@ namespace Envio_de_Emails_Com_Fila_Worker
                     onRetry: (ex, delay, retry, ctx) =>
                     {
                         _logger.LogWarning(ex,
-                            "Tentativa {Retry} de conexão com RabbitMQ falhou. Aguardando {Delay}s. Erro: {Message}",
+                            "Tentativa {Retry} de conexao com RabbitMQ falhou. Aguardando {Delay}s. Erro: {Message}",
                             retry,
                             delay.TotalSeconds,
                             ex.Message
@@ -116,41 +114,13 @@ namespace Envio_de_Emails_Com_Fila_Worker
 
             await retryConnection.ExecuteAsync(async () =>
             {
-                _logger.LogInformation("Tentando conectar no RabbitMQ...");
+                _logger.LogInformation("Tentando conectar no RabbitMQ para persistencia...");
 
                 _connection = await factory.CreateConnectionAsync();
                 _channel = await _connection.CreateChannelAsync();
 
-                _logger.LogInformation("Conectado no RabbitMQ!");
+                _logger.LogInformation("Conectado no RabbitMQ para persistencia!");
             });
-        }
-
-        private async Task ProcessWithRetry(EmailMessage msg, CancellationToken ct)
-        {
-            int[] delays = { 1000, 3000, 9000 };
-
-            for (int i = 0; i < delays.Length; i++)
-            {
-                try
-                {
-                    if (msg.To.Contains("fail"))
-                    {
-                        throw new Exception("Erro");
-                    }
-
-                    await _emailService.SendEmail(msg);
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning($"Tentativa {i + 1} falhou: {ex.Message}");
-
-                    if (i == delays.Length - 1)
-                        throw;
-
-                    await Task.Delay(delays[i], ct);
-                }
-            }
         }
     }
 }

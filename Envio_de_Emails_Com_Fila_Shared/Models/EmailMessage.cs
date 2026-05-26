@@ -6,8 +6,9 @@ namespace Envio_de_Emails_Com_Fila_Shared.Models
 {
     public class EmailMessage
     {
-        public string To { get; set; }
-        public string Content { get; set; }
+        public string MessageId { get; set; } = string.Empty;
+        public string To { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
 
     }
 }

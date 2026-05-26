@@ -66,6 +66,22 @@ services:
       EmailSettings__User: 6b645d262dac7f
       EmailSettings__Pass: e67e38b7ea2b14
 
+  persistence-worker:
+    build:
+      context: .
+      dockerfile: ./Envio_de_Emails_Com_Fila_PersistenceWorker/Dockerfile
+    container_name: persistence_worker
+    depends_on:
+      - rabbitmq
+      - mongodb
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RabbitMQ__HostName: rabbitmq
+      RabbitMQ__UserName: guest
+      RabbitMQ__Password: guest
+      MongoDb__ConnectionString: mongodb://mongodb:27017
+      MongoDb__Database: EnvioEmailsDb
+
 volumes:
   rabbitmq_data:
   mongo_data:

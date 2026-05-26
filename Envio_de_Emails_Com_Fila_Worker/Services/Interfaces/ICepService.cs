@@ -7,6 +7,6 @@ namespace Envio_de_Emails_Com_Fila_Worker.Services.Interfaces
 {
     public interface ICepService
     {
-        Task<string?> GetAdress(string zipCode);
+        Task<string?> GetAddress(string zipCode);
     }
 }

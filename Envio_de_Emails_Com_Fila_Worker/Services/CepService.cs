@@ -16,7 +16,7 @@ namespace Envio_de_Emails_Com_Fila_Worker.Services
             _http = http;
         }
 
-        public async Task<string?> GetAdress(string zipCode)
+        public async Task<string?> GetAddress(string zipCode)
         {
             var response = await _http.GetAsync($"https://viacep.com.br/ws/{zipCode}/json/");
 
