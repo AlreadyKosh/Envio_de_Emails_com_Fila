@@ -22,6 +22,16 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686"   # painel web do Jaeger
+      - "4317:4317"     # OTLP gRPC
+      - "4318:4318"     # OTLP HTTP
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+
   api:
     build:
       context: .
@@ -32,8 +42,10 @@ services:
     depends_on:
       - rabbitmq
       - mongodb
+      - jaeger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
       RabbitMQ__HostName: rabbitmq
       RabbitMQ__UserName: guest
       RabbitMQ__Password: guest
@@ -53,8 +65,10 @@ services:
     depends_on:
       - rabbitmq
       - mongodb
+      - jaeger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
       RabbitMQ__HostName: rabbitmq
       RabbitMQ__UserName: guest
       RabbitMQ__Password: guest
@@ -74,8 +88,10 @@ services:
     depends_on:
       - rabbitmq
       - mongodb
+      - jaeger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
       RabbitMQ__HostName: rabbitmq
       RabbitMQ__UserName: guest
       RabbitMQ__Password: guest

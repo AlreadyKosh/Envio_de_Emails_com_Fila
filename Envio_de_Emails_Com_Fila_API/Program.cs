@@ -1,7 +1,10 @@
 using Envio_de_Emails_Com_Fila_API.Services;
+using Envio_de_Emails_Com_Fila_Shared.Observability;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddEmailQueueOpenTelemetry("envio-emails-api", includeAspNetCore: true);
 
 builder.Services.AddSingleton<RabbitMQService>();
 

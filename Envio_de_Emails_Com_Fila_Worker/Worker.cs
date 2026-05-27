@@ -1,6 +1,8 @@
 using Envio_de_Emails_Com_Fila_Shared.Messaging;
 using Envio_de_Emails_Com_Fila_Shared.Models;
+using Envio_de_Emails_Com_Fila_Shared.Observability;
 using Envio_de_Emails_Com_Fila_Worker.Services;
+using System.Diagnostics;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -60,6 +62,12 @@ namespace Envio_de_Emails_Com_Fila_Worker
 
             consumer.ReceivedAsync += async (sender, ea) =>
             {
+                var parentContext = RabbitMqTraceContext.Extract(ea.BasicProperties);
+                using var activity = EmailQueueActivitySource.Instance.StartActivity(
+                    "rabbitmq consume email.queue",
+                    ActivityKind.Consumer,
+                    parentContext.ActivityContext);
+
                 try
                 {
                     var msg = JsonSerializer.Deserialize<EmailMessage>(
@@ -71,12 +79,18 @@ namespace Envio_de_Emails_Com_Fila_Worker
                         throw new JsonException("Mensagem de email invalida.");
                     }
 
+                    activity?.SetTag("messaging.system", "rabbitmq");
+                    activity?.SetTag("messaging.destination.name", RabbitMqTopology.EmailQueueName);
+                    activity?.SetTag("messaging.message.id", msg.MessageId);
+                    activity?.SetTag("email.to", msg.To);
+
                     await ProcessWithRetry(msg, stoppingToken);
 
                     await _channel.BasicAckAsync(ea.DeliveryTag, false);
                 }
                 catch (Exception ex)
                 {
+                    activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
                     _logger.LogError(ex, "Erro ao processar mensagem");
 
                     await _channel.BasicNackAsync(ea.DeliveryTag, false, false);
@@ -127,6 +141,13 @@ namespace Envio_de_Emails_Com_Fila_Worker
 
         private async Task ProcessWithRetry(EmailMessage msg, CancellationToken ct)
         {
+            using var activity = EmailQueueActivitySource.Instance.StartActivity(
+                "email send",
+                ActivityKind.Internal);
+
+            activity?.SetTag("messaging.message.id", msg.MessageId);
+            activity?.SetTag("email.to", msg.To);
+
             int[] delays = { 1000, 3000, 9000 };
 
             for (int i = 0; i < delays.Length; i++)
@@ -143,6 +164,7 @@ namespace Envio_de_Emails_Com_Fila_Worker
                 }
                 catch (Exception ex)
                 {
+                    activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
                     _logger.LogWarning($"Tentativa {i + 1} falhou: {ex.Message}");
 
                     if (i == delays.Length - 1)

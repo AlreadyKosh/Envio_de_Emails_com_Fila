@@ -1,5 +1,7 @@
 using Envio_de_Emails_Com_Fila_Shared.Messaging;
 using Envio_de_Emails_Com_Fila_Shared.Models;
+using Envio_de_Emails_Com_Fila_Shared.Observability;
+using System.Diagnostics;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
@@ -28,10 +30,20 @@ namespace Envio_de_Emails_Com_Fila_API.Services
 
         public async Task Publish(EmailMessage msg)
         {
+            using var activity = EmailQueueActivitySource.Instance.StartActivity(
+                "rabbitmq publish email.received",
+                ActivityKind.Producer);
+
             if (string.IsNullOrWhiteSpace(msg.MessageId))
             {
                 msg.MessageId = Guid.NewGuid().ToString("N");
             }
+
+            activity?.SetTag("messaging.system", "rabbitmq");
+            activity?.SetTag("messaging.destination.name", RabbitMqTopology.EmailExchangeName);
+            activity?.SetTag("messaging.rabbitmq.routing_key", RabbitMqTopology.EmailReceivedRoutingKey);
+            activity?.SetTag("messaging.message.id", msg.MessageId);
+            activity?.SetTag("email.to", msg.To);
 
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(msg));
 
@@ -40,6 +52,8 @@ namespace Envio_de_Emails_Com_Fila_API.Services
                 MessageId = msg.MessageId,
                 Persistent = true
             };
+
+            RabbitMqTraceContext.Inject(props);
 
             await _channel.BasicPublishAsync(
                 exchange: RabbitMqTopology.EmailExchangeName,

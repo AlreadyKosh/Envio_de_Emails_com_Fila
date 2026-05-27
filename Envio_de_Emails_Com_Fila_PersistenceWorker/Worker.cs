@@ -1,10 +1,12 @@
 using Envio_de_Emails_Com_Fila_PersistenceWorker.Services;
 using Envio_de_Emails_Com_Fila_Shared.Messaging;
 using Envio_de_Emails_Com_Fila_Shared.Models;
+using Envio_de_Emails_Com_Fila_Shared.Observability;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -60,6 +62,12 @@ namespace Envio_de_Emails_Com_Fila_PersistenceWorker
 
             consumer.ReceivedAsync += async (sender, ea) =>
             {
+                var parentContext = RabbitMqTraceContext.Extract(ea.BasicProperties);
+                using var activity = EmailQueueActivitySource.Instance.StartActivity(
+                    "rabbitmq consume email.persistence",
+                    ActivityKind.Consumer,
+                    parentContext.ActivityContext);
+
                 try
                 {
                     var msg = JsonSerializer.Deserialize<EmailMessage>(
@@ -71,11 +79,17 @@ namespace Envio_de_Emails_Com_Fila_PersistenceWorker
                         throw new JsonException("Mensagem de email invalida.");
                     }
 
+                    activity?.SetTag("messaging.system", "rabbitmq");
+                    activity?.SetTag("messaging.destination.name", RabbitMqTopology.EmailPersistenceQueueName);
+                    activity?.SetTag("messaging.message.id", msg.MessageId);
+                    activity?.SetTag("email.to", msg.To);
+
                     await _emailPersistenceService.SaveAsync(msg, stoppingToken);
                     await _channel.BasicAckAsync(ea.DeliveryTag, false);
                 }
                 catch (Exception ex)
                 {
+                    activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
                     _logger.LogError(ex, "Erro ao persistir mensagem de email");
                     await _channel.BasicNackAsync(ea.DeliveryTag, false, false);
                 }
