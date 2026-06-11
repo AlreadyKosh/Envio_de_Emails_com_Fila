@@ -1,8 +1,10 @@
 <Solution>
   <Folder Name="/Itens de Solução/">
     <File Path=".gitignore" />
+    <File Path="docker-compose.yml" />
   </Folder>
-  <Project Path="Envio_de_Emails_Com_Fila.Shared/Envio_de_Emails_Com_Fila.Shared.csproj" Id="90d263e0-9f3a-4f50-9296-37eced7b1a17" />
   <Project Path="Envio_de_Emails_Com_Fila_API/Envio_de_Emails_Com_Fila_API.csproj" />
+  <Project Path="Envio_de_Emails_Com_Fila_PersistenceWorker/Envio_de_Emails_Com_Fila_PersistenceWorker.csproj" Id="9fff3166-5d10-46d4-a789-1a947ea93fd8" />
+  <Project Path="Envio_De_Emails_com_Fila_Shared/Envio_De_Emails_com_Fila_Shared.csproj" DisplayName="Envio_de_Emails_Com_Fila_Shared" Id="65d1edcf-858a-44a5-9909-715c8d4655a5" />
   <Project Path="Envio_de_Emails_Com_Fila_Worker/Envio_de_Emails_Com_Fila_Worker.csproj" />
 </Solution>

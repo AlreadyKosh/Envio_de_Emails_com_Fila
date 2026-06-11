@@ -1,20 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-Envio_de_Emails_Com_Fila_Worker-383689c8-0ff0-4e62-9444-c13c181e6197</UserSecretsId>
+    <UserSecretsId>dotnet-Envio_de_Emails_Com_Fila_PersistenceWorker-380759aa-4259-45bd-8186-3531dcb2c3df</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="4.16.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.8" />
+    <PackageReference Include="MongoDB.Driver" Version="3.8.1" />
     <PackageReference Include="Polly" Version="8.6.6" />
-    <PackageReference Include="Polly.Extensions" Version="8.6.6" />
-    <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
+    <PackageReference Include="SharpCompress" Version="0.48.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.10.1" />
   </ItemGroup>
 
   <ItemGroup>

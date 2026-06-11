@@ -1,6 +1,0 @@
-C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila.Shared\bin\Debug\Envio_de_Emails_Com_Fila.Shared.dll
-C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila.Shared\bin\Debug\Envio_de_Emails_Com_Fila.Shared.pdb
-C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila.Shared\obj\Debug\Envio_de_Emails_Com_Fila.Shared.csproj.AssemblyReference.cache
-C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila.Shared\obj\Debug\Envio_de_Emails_Com_Fila.Shared.csproj.CoreCompileInputs.cache
-C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila.Shared\obj\Debug\Envio_de_Emails_Com_Fila.Shared.dll
-C:\Users\t2s-douglas_carreira\Workspace\Envio_de_Emails_Com_Fila\Envio_de_Emails_Com_Fila.Shared\obj\Debug\Envio_de_Emails_Com_Fila.Shared.pdb

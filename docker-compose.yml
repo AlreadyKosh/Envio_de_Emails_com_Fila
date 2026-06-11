@@ -1,0 +1,116 @@
+version: '3.9'
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # comunicação
+      - "15672:15672"   # painel web
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686"   # painel web do Jaeger
+      - "4317:4317"     # OTLP gRPC
+      - "4318:4318"     # OTLP HTTP
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Envio_de_Emails_Com_Fila_API/Dockerfile
+    container_name: api_envio_emails
+    ports:
+      - "5000:8080"
+    depends_on:
+      - rabbitmq
+      - mongodb
+      - jaeger
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      RabbitMQ__HostName: rabbitmq
+      RabbitMQ__UserName: guest
+      RabbitMQ__Password: guest
+      MongoDb__ConnectionString: mongodb://mongodb:27017
+      MongoDb__Database: EnvioEmailsDb
+      Redis__ConnectionString: redis:6379
+       
+      EmailSettings__Host: sandbox.smtp.mailtrap.io
+      EmailSettings__Port: 587
+      EmailSettings__User: 6b645d262dac7f
+      EmailSettings__Pass: e67e38b7ea2b14
+
+  worker:
+    build:
+      context: .
+      dockerfile: ./Envio_de_Emails_Com_Fila_Worker/Dockerfile
+    container_name: worker
+    depends_on:
+      - rabbitmq
+      - mongodb
+      - redis
+      - jaeger
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      RabbitMQ__HostName: rabbitmq
+      RabbitMQ__UserName: guest
+      RabbitMQ__Password: guest
+      MongoDb__ConnectionString: mongodb://mongodb:27017
+      MongoDb__Database: EnvioEmailsDb
+
+      EmailSettings__Host: sandbox.smtp.mailtrap.io
+      EmailSettings__Port: 587
+      EmailSettings__User: 6b645d262dac7f
+      EmailSettings__Pass: e67e38b7ea2b14
+
+  persistence-worker:
+    build:
+      context: .
+      dockerfile: ./Envio_de_Emails_Com_Fila_PersistenceWorker/Dockerfile
+    container_name: persistence_worker
+    depends_on:
+      - rabbitmq
+      - mongodb
+      - redis
+      - jaeger
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      RabbitMQ__HostName: rabbitmq
+      RabbitMQ__UserName: guest
+      RabbitMQ__Password: guest
+      MongoDb__ConnectionString: mongodb://mongodb:27017
+      MongoDb__Database: EnvioEmailsDb
+      Redis__ConnectionString: redis:6379
+
+volumes:
+  rabbitmq_data:
+  mongo_data:
+  redis_data:
