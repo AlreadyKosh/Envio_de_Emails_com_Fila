@@ -10,10 +10,26 @@ namespace Envio_de_Emails_Com_Fila_API.Controllers
     public class MessagesController : ControllerBase
     {
         private readonly RabbitMQService _rabbit;
+        private readonly MongoEmailReadService _mongoEmailReadService;
 
-        public MessagesController(RabbitMQService rabbit)
+        public MessagesController(RabbitMQService rabbit, MongoEmailReadService mongoEmailReadService)
         {
             _rabbit = rabbit;
+            _mongoEmailReadService = mongoEmailReadService;
+        }
+
+        /// <summary>
+        /// Lista os emails persistidos no MongoDB.
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet]
+        public async Task<IActionResult> Get(
+            [FromQuery] int limit = 50,
+            [FromQuery] string? cep = null,
+            CancellationToken cancellationToken = default)
+        {
+            var emails = await _mongoEmailReadService.GetEmailsAsync(limit, cep, cancellationToken);
+            return Ok(emails);
         }
 
         /// <summary>

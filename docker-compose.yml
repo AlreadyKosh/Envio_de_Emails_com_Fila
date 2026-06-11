@@ -22,6 +22,14 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
   jaeger:
     image: jaegertracing/all-in-one:latest
     container_name: jaeger
@@ -51,6 +59,7 @@ services:
       RabbitMQ__Password: guest
       MongoDb__ConnectionString: mongodb://mongodb:27017
       MongoDb__Database: EnvioEmailsDb
+      Redis__ConnectionString: redis:6379
        
       EmailSettings__Host: sandbox.smtp.mailtrap.io
       EmailSettings__Port: 587
@@ -65,6 +74,7 @@ services:
     depends_on:
       - rabbitmq
       - mongodb
+      - redis
       - jaeger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
@@ -88,6 +98,7 @@ services:
     depends_on:
       - rabbitmq
       - mongodb
+      - redis
       - jaeger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
@@ -97,7 +108,9 @@ services:
       RabbitMQ__Password: guest
       MongoDb__ConnectionString: mongodb://mongodb:27017
       MongoDb__Database: EnvioEmailsDb
+      Redis__ConnectionString: redis:6379
 
 volumes:
   rabbitmq_data:
   mongo_data:
+  redis_data:

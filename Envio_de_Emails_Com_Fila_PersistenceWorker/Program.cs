@@ -7,6 +7,9 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.AddEmailQueueOpenTelemetry("envio-emails-persistence-worker");
 
 builder.Services.AddSingleton<EmailPersistenceService>();
+builder.Services.AddSingleton<EmailContentEnricher>();
+builder.Services.AddSingleton<EmailCacheInvalidationService>();
+builder.Services.AddHttpClient<CepService>();
 builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();

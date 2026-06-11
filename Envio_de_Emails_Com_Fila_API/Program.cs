@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddEmailQueueOpenTelemetry("envio-emails-api", includeAspNetCore: true);
 
 builder.Services.AddSingleton<RabbitMQService>();
+builder.Services.AddSingleton<EmailCacheService>();
+builder.Services.AddSingleton<MongoEmailReadService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
